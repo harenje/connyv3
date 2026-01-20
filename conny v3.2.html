@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connys Pferdewelt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --magenta: #E6007E;
+            --navy: #0A192F;
+            --cream: #FAF9F6;
+            --white: #ffffff;
+            --text: #1A1A1A;
+            --gutter-width-mobile: 65px;
+            --gutter-width-desktop: 30vw;
+            --transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+        body {
+            background-color: var(--cream);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- THE FIXED GUTTER (The Anchor) --- */
+        .branding-gutter {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: var(--gutter-width-mobile);
+            background: var(--navy);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px 0;
+            overflow: hidden;
+            border-right: 1px solid rgba(230, 0, 126, 0.2);
+        }
+
+        .gutter-visual {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/Nog3gf7.jpg') center/cover;
+            opacity: 0.25;
+            filter: grayscale(1) contrast(1.2);
+        }
+
+        .gutter-logo-box {
+            position: relative;
+            z-index: 2;
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            mix-blend-mode: screen;
+        }
+
+        .gutter-logo-img { width: 100%; height: auto; mix-blend-mode: multiply; }
+
+        .vertical-branding {
+            writing-mode: vertical-rl;
+            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 5vh, 3.5rem);
+            color: var(--magenta);
+            letter-spacing: 6px;
+            transform: rotate(180deg);
+            z-index: 2;
+            white-space: nowrap;
+            will-change: transform;
+            font-weight: 700;
+        }
+
+        /* --- MAIN CONTENT AREA --- */
+        .content-wrapper {
+            margin-left: var(--gutter-width-mobile);
+            width: calc(100% - var(--gutter-width-mobile));
+            padding: 40px 6%;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 80px;
+        }
+
+        .location-tag {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--magenta);
+            font-weight: 700;
+        }
+
+        /* --- Editorial Layout --- */
+        .section-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--magenta);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--navy);
+            line-height: 1.05;
+            margin-bottom: 2.5rem;
+        }
+
+        h1 { font-size: clamp(2.8rem, 9vw, 5.5rem); }
+        h1 span { color: var(--magenta); font-style: italic; }
+        
+        h2 { font-size: clamp(2.2rem, 7vw, 3.8rem); }
+
+        .hero-lead {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            line-height: 1.6;
+            font-weight: 300;
+            margin-bottom: 4rem;
+            max-width: 700px;
+            color: var(--text);
+        }
+
+        /* --- Training Stack --- */
+        .card-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 5rem 0;
+        }
+
+        .training-card {
+            background: var(--white);
+            padding: 50px 40px;
+            border-radius: 4px;
+            box-shadow: 15px 15px 0px rgba(230, 0, 126, 0.03);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 1024px) {
+            .training-card { grid-template-columns: 0.7fr 0.3fr; align-items: center; }
+        }
+
+        .training-card:hover {
+            transform: translateX(15px);
+            border-color: var(--magenta);
+            box-shadow: 25px 25px 0px rgba(230, 0, 126, 0.1);
+        }
+
+        .training-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--navy);
+        }
+
+        /* --- Media Elements --- */
+        .image-container {
+            margin: 6rem 0;
+            position: relative;
+        }
+
+        .main-img {
+            width: 100%;
+            height: 650px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 40px 40px 0px var(--white);
+        }
+
+        /* --- Contact Area --- */
+        .contact-wrap {
+            background: var(--navy);
+            color: white;
+            padding: 100px 10%;
+            margin-left: -7%;
+            margin-right: -7%;
+            border-radius: 4px;
+        }
+
+        .contact-link-large {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin: 20px 0;
+            transition: 0.3s;
+        }
+
+        .contact-link-large:hover { color: var(--magenta); transform: translateX(10px); }
+
+        /* --- Desktop Specifics --- */
+        @media (min-width: 1024px) {
+            .branding-gutter { width: var(--gutter-width-desktop); }
+            .content-wrapper { 
+                margin-left: var(--gutter-width-desktop); 
+                width: calc(100% - var(--gutter-width-desktop));
+                padding: 120px 12%;
+            }
+            .vertical-branding { font-size: 9vh; }
+            .gutter-logo-box { width: 40%; padding: 20px; }
+        }
+
+        /* --- Mobile Tweaks --- */
+        @media (max-width: 768px) {
+            .content-wrapper { padding: 40px 8% 40px 5%; }
+            .main-img { height: 400px; box-shadow: 20px 20px 0px var(--white); }
+            .gutter-logo-box { width: 85%; padding: 5px; }
+            .vertical-branding { font-size: 1.5rem; letter-spacing: 3px; }
+        }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR ANCHOR -->
+    <div class="branding-gutter">
+        <div class="gutter-visual"></div>
+        
+        <div class="gutter-logo-box">
+            <img src="https://i.imgur.com/BK2U01c.png" class="gutter-logo-img" alt="Logo">
+        </div>
+
+        <h1 class="vertical-branding" id="kineticText">Rehatraining</h1>
+        
+        <div style="z-index: 2; color: white; font-size: 0.6rem; letter-spacing: 2px; opacity: 0.5;">
+            EST. 2026
+        </div>
+    </div>
+
+    <!-- MAIN SCROLLING CONTENT -->
+    <div class="content-wrapper">
+        <header>
+            <div class="location-tag">Oberwaltersdorf — Baden — NÖ</div>
+        </header>
+
+        <main>
+            <!-- Section 1: Hero -->
+            <section class="reveal active">
+                <span class="section-tag">Das Konzept</span>
+                <h1>Blau-Gelbe <span>Wissenschaft.</span></h1>
+                <p class="hero-lead">
+                    Ich bin Conny – Trainerin für Dual-Aktivierung® und Equikinetic®. Gemeinsam finden wir den Weg zu mehr Balance, Kraft und mentaler Gelassenheit für dein Pferd.
+                </p>
+                <img src="https://i.imgur.com/3JGjT6Y.jpg" class="main-img reveal" alt="Conny mit Pferd">
+            </section>
+
+            <!-- Section 2: Story -->
+            <section class="reveal" style="margin-top: 10rem;">
+                <span class="section-tag">Über mich</span>
+                <h2>Aus Erfahrung geboren.</h2>
+                <p style="margin-bottom: 3rem; font-size: 1.2rem;">Aufgrund immer wiederkehrender Lahmheit meines eigenen Pferdes kam ich zum Geitner Training. Heute gebe ich dieses effektive Konzept leidenschaftlich weiter.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center;">
+                    <img src="https://i.imgur.com/8jssa1D.jpg" style="width: 100%; border-radius: 4px;" alt="Hugging horse">
+                    <div>
+                        <p style="opacity: 0.8;">Ohne Vorkenntnisse zu schnellen Erfolgen: Muskelaufbau, Koordination und Aufmerksamkeit stehen im Fokus meiner Arbeit.</p>
+                        <br>
+                        <p style="font-weight: 700; color: var(--magenta);">Lizenziert</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Training Cards -->
+            <section class="reveal" style="margin-top: 10rem;">
+                <span class="section-tag">Angebote</span>
+                <h2>Training & Kurse</h2>
+                
+                <div class="card-stack">
+                    <div class="training-card">
+                        <div>
+                            <h4>Einzeltraining</h4>
+                            <p>Individueller Trainingsplan basierend auf dem Gesundheitszustand deines Pferdes.</p>
+                        </div>
+                        <img src="https://i.imgur.com/o7Yblom.jpg" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                    </div>
+
+                    <div class="training-card">
+                        <div>
+                            <h4>Tageskurse</h4>
+                            <p>Intensive Einheiten mit mehreren Teilnehmern direkt bei Dir im Stall.</p>
+                        </div>
+                        <img src="https://i.imgur.com/hzjHHuW.jpg" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                    </div>
+
+                    <div class="training-card">
+                        <div>
+                            <h4>2-Tageskurse</h4>
+                            <p>Theorie und Praxis zu Dualaktivierung® und Equikinetic® vor Ort.</p>
+                        </div>
+                        <img src="https://i.imgur.com/3ZTnupP.jpg" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Contact -->
+            <section class="contact-wrap reveal" style="margin-top: 10rem;">
+                <span class="section-tag" style="color: var(--magenta);">Kontakt</span>
+                <h2 style="color: white;">Bereit für Veränderung?</h2>
+                <p style="opacity: 0.7;">Melde dich telefonisch oder per Mail für Terminanfragen.</p>
+                
+                <div style="margin: 4rem 0;">
+                    <a href="tel:06644236141" class="contact-link-large">0664 - 423 61 41</a>
+                    <a href="mailto:conny.bluemert@aon.at" class="contact-link-large" style="font-size: clamp(1.5rem, 4vw, 2.5rem);">conny.bluemert@aon.at</a>
+                </div>
+
+                <a href="https://www.instagram.com/connys.pferdewelt/" target="_blank" style="color: var(--magenta); text-decoration: none; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem;">Instagram: @connys.pferdewelt</a>
+            </section>
+
+            <footer style="margin-top: 6rem; padding-bottom: 4rem; font-size: 0.8rem; opacity: 0.5;">
+                <p>© 2026 Connys Pferdewelt | Conny Blümert</p>
+                <p>Dual-Aktivierungstrainer Stufe I | Equikinetic® Trainer</p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Kinetic Scroll Effect
+        const kineticText = document.getElementById('kineticText');
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY;
+            const multiplier = window.innerWidth > 1024 ? 0.25 : 0.15;
+            kineticText.style.transform = `rotate(180deg) translateY(${scrollPos * multiplier}px)`;
+        });
+
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
